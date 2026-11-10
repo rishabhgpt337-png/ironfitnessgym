@@ -1,39 +1,42 @@
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type SectionHeadingProps = {
+  index?: string;
   eyebrow: string;
   heading: string;
   accent: string;
   intro?: string;
-  align?: "left" | "center";
+  aside?: ReactNode;
   className?: string;
 };
 
 export default function SectionHeading({
+  index,
   eyebrow,
   heading,
   accent,
   intro,
-  align = "left",
+  aside,
   className,
 }: SectionHeadingProps) {
   return (
-    <div
-      className={cn(
-        "max-w-2xl",
-        align === "center" && "mx-auto flex flex-col items-center text-center",
-        className,
-      )}
-    >
-      <p className="eyebrow eyebrow-line">{eyebrow}</p>
-      <h2 className="display-title mt-4 text-balance">
-        {heading} <span className="text-accent">{accent}</span>
-      </h2>
-      {intro ? (
-        <p className="mt-5 max-w-xl text-pretty text-[15px] leading-relaxed text-muted sm:text-base">
-          {intro}
+    <header className={cn("grid gap-8 border-t border-border pt-5 md:grid-cols-12 md:gap-10", className)}>
+      <div className="md:col-span-8">
+        <p className="index-label flex items-center gap-3">
+          {index ? <span className="text-accent">{index}</span> : null}
+          <span aria-hidden="true" className="h-px w-8 bg-border" />
+          <span>{eyebrow}</span>
         </p>
-      ) : null}
-    </div>
+        <h2 className="display mt-5">
+          <span className="block">{heading}</span>
+          <span className="block text-accent">{accent}</span>
+        </h2>
+        {intro ? (
+          <p className="mt-6 max-w-xl text-pretty text-[15px] leading-relaxed text-muted">{intro}</p>
+        ) : null}
+      </div>
+      {aside ? <div className="md:col-span-4 md:self-end md:justify-self-end">{aside}</div> : null}
+    </header>
   );
 }

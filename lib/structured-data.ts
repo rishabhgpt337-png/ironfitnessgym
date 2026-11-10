@@ -14,15 +14,14 @@ export function buildGymJsonLd() {
     image: `${siteUrl}${seo.ogImage}`,
     logo: `${siteUrl}/icon.svg`,
     telephone: contact.phone,
-    email: contact.email,
-    priceRange: "₹₹",
     sameAs: [social.instagram],
     hasMap: contact.mapsUrl,
     address: {
       "@type": "PostalAddress",
       streetAddress: contact.address,
-      addressLocality: brand.city,
+      addressLocality: brand.locality,
       addressRegion: brand.region,
+      postalCode: "400081",
       addressCountry: "IN",
     },
     geo: {

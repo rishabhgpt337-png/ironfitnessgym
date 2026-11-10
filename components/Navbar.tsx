@@ -2,32 +2,30 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, Phone, X } from "lucide-react";
 import Logo from "@/components/Logo";
-import { navLinks } from "@/data/gym";
-import { cn, focusRing } from "@/lib/utils";
+import { contact, navLinks } from "@/data/gym";
+import { cn, focusRing, telHref } from "@/lib/utils";
 import { scrollToId } from "@/lib/enquiry";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [active, setActive] = useState<string>("");
+  const [active, setActive] = useState("");
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const drawerRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 36);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
-    const ids = navLinks.map((link) => link.href.replace("#", ""));
-    const sections = ids
-      .map((id) => document.getElementById(id))
+    const sections = navLinks
+      .map((link) => document.getElementById(link.href.replace("#", "")))
       .filter((section): section is HTMLElement => Boolean(section));
 
     if (!sections.length) return;
@@ -35,28 +33,14 @@ export default function Navbar() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActive(`#${entry.target.id}`);
-          }
+          if (entry.isIntersecting) setActive(`#${entry.target.id}`);
         });
       },
-      { rootMargin: "-42% 0px -50% 0px", threshold: 0 },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
     );
 
     sections.forEach((section) => observer.observe(section));
-
-    const onScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 120) {
-        setActive("#contact");
-      }
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", onScroll);
-    };
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -69,38 +53,10 @@ export default function Navbar() {
       if (event.key === "Escape") {
         event.preventDefault();
         setOpen(false);
-        return;
-      }
-
-      if (event.key !== "Tab") return;
-
-      const root = drawerRef.current;
-      if (!root) return;
-
-      const focusables = Array.from(
-        root.querySelectorAll<HTMLElement>(
-          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-        ),
-      ).filter((element) => element.offsetParent !== null);
-
-      if (!focusables.length) return;
-
-      const first = focusables[0];
-      const last = focusables[focusables.length - 1];
-      const current = document.activeElement;
-
-      if (event.shiftKey) {
-        if (current === first || !root.contains(current)) {
-          event.preventDefault();
-          last.focus();
-        }
-      } else if (current === last || !root.contains(current)) {
-        event.preventDefault();
-        first.focus();
       }
     };
-    window.addEventListener("keydown", onKeyDown);
 
+    window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.classList.remove("drawer-open");
       window.removeEventListener("keydown", onKeyDown);
@@ -108,36 +64,30 @@ export default function Navbar() {
     };
   }, [open]);
 
-  const handleNav = (href: string) => {
-    setActive(href);
-    setOpen(false);
-  };
-
   return (
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+          "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
           scrolled || open
-            ? "border-b border-border/70 bg-bg/85 backdrop-blur-xl"
+            ? "border-b border-border bg-bg/95 backdrop-blur-md"
             : "border-b border-transparent bg-transparent",
         )}
       >
-        <div className="container-edge flex h-[72px] items-center justify-between gap-5 sm:h-20">
+        <div className="container-edge flex h-[72px] items-center justify-between gap-6 lg:h-20">
           <Logo />
 
-          <nav aria-label="Primary" className="hidden items-center gap-5 lg:flex xl:gap-7">
+          <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
             {navLinks.map((link) => {
               const isActive = active === link.href;
               return (
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => handleNav(link.href)}
                   aria-current={isActive ? "true" : undefined}
                   className={cn(
                     focusRing,
-                    "group relative py-2 font-label text-[11px] font-medium uppercase tracking-[0.16em] transition-colors duration-200",
+                    "relative py-2 font-label text-[10.5px] font-medium uppercase tracking-[0.18em] transition-colors duration-200",
                     isActive ? "text-text" : "text-muted hover:text-text",
                   )}
                 >
@@ -146,7 +96,7 @@ export default function Navbar() {
                     aria-hidden="true"
                     className={cn(
                       "absolute -bottom-0.5 left-0 h-px bg-accent transition-all duration-300",
-                      isActive ? "w-full" : "w-0 group-hover:w-full",
+                      isActive ? "w-full" : "w-0",
                     )}
                   />
                 </a>
@@ -154,14 +104,22 @@ export default function Navbar() {
             })}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-4">
+            <a
+              href={telHref()}
+              className="hidden items-center gap-2 font-label text-[10.5px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-text xl:flex"
+            >
+              <Phone className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+              {contact.phone}
+            </a>
+
             <button
               type="button"
               onClick={() => scrollToId("enquire")}
-              className="btn-primary hidden min-h-[42px] px-5 py-2.5 text-[11px] sm:inline-flex"
+              className="btn-primary hidden min-h-[42px] px-5 py-2.5 text-[10px] sm:inline-flex"
             >
-              Join Now
-              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              Free trial
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </button>
 
             <button
@@ -173,7 +131,7 @@ export default function Navbar() {
               aria-controls="mobile-menu"
               className={cn(
                 focusRing,
-                "grid h-11 w-11 place-items-center rounded-sharp border border-border/80 text-text transition-colors hover:border-accent hover:text-accent lg:hidden",
+                "grid h-10 w-10 place-items-center border border-border text-text transition-colors hover:border-accent hover:text-accent lg:hidden",
               )}
             >
               <Menu className="h-5 w-5" aria-hidden="true" />
@@ -196,10 +154,9 @@ export default function Navbar() {
               aria-label="Close menu"
               tabIndex={-1}
               onClick={() => setOpen(false)}
-              className="absolute inset-0 h-full w-full cursor-default bg-black/70 backdrop-blur-sm"
+              className="absolute inset-0 h-full w-full cursor-default bg-black/80"
             />
             <motion.aside
-              ref={drawerRef}
               id="mobile-menu"
               role="dialog"
               aria-modal="true"
@@ -207,10 +164,10 @@ export default function Navbar() {
               initial={reduceMotion ? false : { x: "100%" }}
               animate={{ x: 0 }}
               exit={reduceMotion ? undefined : { x: "100%" }}
-              transition={{ type: "tween", duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-y-0 right-0 flex w-[86%] max-w-sm flex-col border-l border-border bg-surface shadow-2xl"
+              transition={{ type: "tween", duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-y-0 right-0 flex w-[88%] max-w-sm flex-col border-l border-border bg-bg"
             >
-              <div className="flex h-[72px] items-center justify-between border-b border-border/70 px-5 sm:h-20">
+              <div className="flex h-[72px] items-center justify-between border-b border-border px-5">
                 <Logo />
                 <button
                   ref={closeButtonRef}
@@ -219,7 +176,7 @@ export default function Navbar() {
                   aria-label="Close menu"
                   className={cn(
                     focusRing,
-                    "grid h-11 w-11 place-items-center rounded-sharp border border-border text-text transition-colors hover:border-accent hover:text-accent",
+                    "grid h-10 w-10 place-items-center border border-border text-text transition-colors hover:border-accent hover:text-accent",
                   )}
                 >
                   <X className="h-5 w-5" aria-hidden="true" />
@@ -227,39 +184,33 @@ export default function Navbar() {
               </div>
 
               <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-5 py-6">
-                <ul className="space-y-1">
-                  {navLinks.map((link, index) => {
-                    const isActive = active === link.href;
-                    return (
-                      <li key={link.href}>
-                        <a
-                          href={link.href}
-                          onClick={() => handleNav(link.href)}
-                          aria-current={isActive ? "true" : undefined}
-                          className={cn(
-                            focusRing,
-                            "group flex items-center justify-between border-b border-border/50 py-3.5 font-display text-2xl uppercase tracking-wide transition-colors",
-                            isActive ? "text-accent" : "text-text hover:text-accent",
-                          )}
-                        >
-                          <span className="flex items-baseline gap-3">
-                            <span className="font-label text-[10px] tracking-[0.2em] text-muted">
-                              {String(index + 1).padStart(2, "0")}
-                            </span>
+                <ul>
+                  {navLinks.map((link, index) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        onClick={() => setOpen(false)}
+                        className={cn(
+                          focusRing,
+                          "group flex items-baseline justify-between border-b border-border py-4",
+                        )}
+                      >
+                        <span className="flex items-baseline gap-4">
+                          <span className="font-label text-[9px] tracking-[0.2em] text-muted">
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+                          <span className="font-display text-[1.9rem] uppercase leading-none text-text transition-colors group-hover:text-accent">
                             {link.label}
                           </span>
-                          <ArrowUpRight
-                            className="h-4 w-4 text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
-                            aria-hidden="true"
-                          />
-                        </a>
-                      </li>
-                    );
-                  })}
+                        </span>
+                        <ArrowUpRight className="h-4 w-4 text-muted" aria-hidden="true" />
+                      </a>
+                    </li>
+                  ))}
                 </ul>
               </nav>
 
-              <div className="border-t border-border/70 p-5 safe-bottom">
+              <div className="border-t border-border p-5 safe-bottom">
                 <button
                   type="button"
                   onClick={() => {
@@ -268,12 +219,16 @@ export default function Navbar() {
                   }}
                   className="btn-primary w-full"
                 >
-                  Book a Free Trial
+                  Book a free trial
                   <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </button>
-                <p className="mt-3 text-center font-label text-[10px] uppercase tracking-[0.24em] text-muted">
-                  Mumbai · Seven days a week
-                </p>
+                <a
+                  href={telHref()}
+                  className="mt-3 flex items-center justify-center gap-2 font-label text-[10px] uppercase tracking-[0.2em] text-muted"
+                >
+                  <Phone className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
+                  {contact.phone}
+                </a>
               </div>
             </motion.aside>
           </motion.div>

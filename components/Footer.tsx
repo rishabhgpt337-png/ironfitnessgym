@@ -1,4 +1,4 @@
-import { ArrowUp, ArrowUpRight, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUp, ArrowUpRight, Instagram, MapPin, Phone } from "lucide-react";
 import Logo from "@/components/Logo";
 import { brand, contact, copy, navLinks } from "@/data/gym";
 import { getGroupedHours } from "@/lib/hours";
@@ -9,9 +9,9 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-border bg-bg">
-      <div className="container-edge pb-28 pt-16 md:pb-10 lg:pt-20">
-        <div className="grid gap-11 md:grid-cols-2 lg:grid-cols-[1.35fr_0.7fr_1fr_0.9fr]">
+    <footer className="border-t border-border bg-bg">
+      <div className="container-edge pb-28 pt-16 md:pb-12 lg:pt-20">
+        <div className="grid gap-11 md:grid-cols-2 lg:grid-cols-[1.4fr_0.7fr_1.1fr_0.9fr]">
           <div>
             <Logo />
             <p className="mt-5 max-w-xs text-[13px] leading-relaxed text-muted">
@@ -23,7 +23,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${brand.name} on Instagram`}
-                className="grid h-10 w-10 place-items-center rounded-sharp border border-border text-muted transition-colors hover:border-accent hover:text-accent"
+                className="grid h-10 w-10 place-items-center border border-border text-muted transition-colors hover:border-accent hover:text-accent"
               >
                 <Instagram className="h-4 w-4" aria-hidden="true" />
               </a>
@@ -32,14 +32,14 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`${brand.name} on Google Maps`}
-                className="grid h-10 w-10 place-items-center rounded-sharp border border-border text-muted transition-colors hover:border-accent hover:text-accent"
+                className="grid h-10 w-10 place-items-center border border-border text-muted transition-colors hover:border-accent hover:text-accent"
               >
                 <MapPin className="h-4 w-4" aria-hidden="true" />
               </a>
               <a
                 href={telHref()}
                 aria-label={`Call ${brand.name}`}
-                className="grid h-10 w-10 place-items-center rounded-sharp border border-border text-muted transition-colors hover:border-accent hover:text-accent"
+                className="grid h-10 w-10 place-items-center border border-border text-muted transition-colors hover:border-accent hover:text-accent"
               >
                 <Phone className="h-4 w-4" aria-hidden="true" />
               </a>
@@ -47,35 +47,25 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="font-label text-[9.5px] font-semibold uppercase tracking-[0.24em] text-text">
-              {copy.footer.quickLinksLabel}
-            </p>
-            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5">
+            <p className="index-label text-text">{copy.footer.quickLinksLabel}</p>
+            <ul className="mt-4 space-y-2.5">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <a
-                    href={link.href}
-                    className="link-underline font-label text-[10.5px] uppercase tracking-[0.12em]"
-                  >
+                  <a href={link.href} className="text-[12.5px] text-muted transition-colors hover:text-accent">
                     {link.label}
                   </a>
                 </li>
               ))}
               <li>
-                <a
-                  href="#enquire"
-                  className="link-underline font-label text-[10.5px] uppercase tracking-[0.12em]"
-                >
-                  Free Trial
+                <a href="#enquire" className="text-[12.5px] text-muted transition-colors hover:text-accent">
+                  Free trial
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <p className="font-label text-[9.5px] font-semibold uppercase tracking-[0.24em] text-text">
-              {copy.footer.contactLabel}
-            </p>
+            <p className="index-label text-text">{copy.footer.contactLabel}</p>
             <ul className="mt-4 space-y-3 text-[12.5px] leading-relaxed text-muted">
               <li>
                 <a
@@ -95,21 +85,20 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a
-                  href={telHref()}
-                  className="flex items-center gap-2 transition-colors hover:text-accent"
-                >
+                <a href={telHref()} className="flex items-center gap-2 transition-colors hover:text-accent">
                   <Phone className="h-3.5 w-3.5 shrink-0 text-accent" aria-hidden="true" />
                   {contact.phone}
                 </a>
               </li>
               <li>
                 <a
-                  href={`mailto:${contact.email}`}
-                  className="flex items-center gap-2 break-all transition-colors hover:text-accent"
+                  href={contact.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 transition-colors hover:text-accent"
                 >
-                  <Mail className="h-3.5 w-3.5 shrink-0 text-accent" aria-hidden="true" />
-                  {contact.email}
+                  <Instagram className="h-3.5 w-3.5 shrink-0 text-accent" aria-hidden="true" />
+                  {contact.instagramHandle}
                 </a>
               </li>
             </ul>
@@ -117,23 +106,18 @@ export default function Footer() {
               href={contact.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-4 inline-flex items-center gap-1.5 font-label text-[9.5px] font-semibold uppercase tracking-[0.16em] text-accent"
+              className="link-line mt-4"
             >
               Get directions
-              <ArrowUpRight
-                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-                aria-hidden="true"
-              />
+              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
             </a>
           </div>
 
           <div>
-            <p className="font-label text-[9.5px] font-semibold uppercase tracking-[0.24em] text-text">
-              {copy.footer.hoursLabel}
-            </p>
-            <dl className="mt-4 space-y-2.5">
+            <p className="index-label text-text">{copy.footer.hoursLabel}</p>
+            <dl className="mt-4 space-y-2">
               {groupedHours.map((group) => (
-                <div key={group.label} className="flex flex-col gap-0.5">
+                <div key={group.label}>
                   <dt className="font-label text-[9px] uppercase tracking-[0.16em] text-muted">
                     {group.label}
                   </dt>
@@ -141,12 +125,9 @@ export default function Footer() {
                 </div>
               ))}
             </dl>
-            <a
-              href="#timings"
-              className="mt-3 inline-block font-label text-[9px] uppercase tracking-[0.16em] text-muted underline decoration-border underline-offset-4 transition-colors hover:text-accent"
-            >
-              Full timetable
-            </a>
+            <p className="mt-4 text-[10.5px] leading-relaxed text-muted/70">
+              Holiday hours can differ.
+            </p>
           </div>
         </div>
 
@@ -154,29 +135,19 @@ export default function Footer() {
           <p className="font-label text-[9px] uppercase tracking-[0.16em] text-muted">
             © {year} {brand.name}. {copy.footer.rights}
           </p>
-          <div className="flex items-center gap-5">
-            <p className="font-label text-[9px] uppercase tracking-[0.16em] text-muted">
-              {brand.city} · {brand.region} · {brand.country}
+          <div className="flex flex-wrap items-center gap-5">
+            <p className="max-w-md text-[10px] leading-relaxed text-muted/60">
+              {copy.footer.photoCredit}
             </p>
             <a
               href="#top"
               className="group inline-flex items-center gap-1.5 font-label text-[9px] uppercase tracking-[0.16em] text-muted transition-colors hover:text-accent"
             >
               {copy.footer.backToTop}
-              <ArrowUp
-                className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5"
-                aria-hidden="true"
-              />
+              <ArrowUp className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5" aria-hidden="true" />
             </a>
           </div>
         </div>
-      </div>
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none h-16 overflow-hidden border-t border-border/40 bg-[repeating-linear-gradient(115deg,rgba(255,255,255,0.05)_0px,rgba(255,255,255,0.05)_2px,transparent_2px,transparent_26px)] md:h-24"
-      >
-        <div className="h-full bg-[linear-gradient(to_right,rgba(255,90,31,0.10),transparent_55%)]" />
       </div>
     </footer>
   );

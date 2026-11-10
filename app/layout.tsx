@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FloatingActions from "@/components/FloatingActions";
+import MotionProvider from "@/components/MotionProvider";
 import { brand, seo } from "@/data/gym";
 
 const anton = Anton({
@@ -15,7 +16,7 @@ const anton = Anton({
 
 const oswald = Oswald({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
   variable: "--font-oswald",
   display: "swap",
 });
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
         url: seo.ogImage,
         width: 1200,
         height: 630,
-        alt: "Iron Temple Gym — strength training in Mumbai",
+        alt: "Iron Temple Gym — strength training in Mulund East, Mumbai",
       },
     ],
   },
@@ -72,13 +73,11 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0B0B0C",
+  themeColor: "#08090A",
   colorScheme: "dark",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en-IN" className={`${anton.variable} ${oswald.variable} ${inter.variable}`}>
       <body>
@@ -89,7 +88,9 @@ export default function RootLayout({
           Skip to content
         </a>
         <Navbar />
-        <main id="main">{children}</main>
+        <main id="main">
+          <MotionProvider>{children}</MotionProvider>
+        </main>
         <Footer />
         <FloatingActions />
       </body>

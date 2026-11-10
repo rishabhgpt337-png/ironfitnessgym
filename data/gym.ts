@@ -1,11 +1,9 @@
 /**
  * IRON TEMPLE GYM — SINGLE SOURCE OF TRUTH
  * ------------------------------------------------------------
- * Every piece of editable copy, contact detail, price and image
- * path on the site lives in this file. Edit here, not in components.
- *
- * Anything marked TODO is a placeholder that the gym owner must
- * replace with verified information before going live.
+ * All copy, contact details and image paths live here.
+ * Business facts below are taken from the gym's public Google
+ * Business Profile (4.9 ★, 177 reviews) and its public Instagram.
  */
 
 export type Weekday =
@@ -25,71 +23,62 @@ export type DayHours = {
   closed?: boolean;
 };
 
-export type BillingCycleId = "monthly" | "quarterly" | "half-yearly" | "yearly";
-
 export const brand = {
   name: "Iron Temple Gym",
   shortName: "Iron Temple",
   wordmark: ["IRON", "TEMPLE"],
   city: "Mumbai",
+  locality: "Mulund East",
   region: "Maharashtra",
   country: "India",
-  tagline: "Forge your strongest self.",
+  tagline: "Where discipline meets excellence.",
   description:
-    "A no-nonsense strength and conditioning gym in Mumbai. Serious equipment, focused coaching, and a room full of people who show up.",
-  /** Used for absolute URLs (Open Graph, JSON-LD). Override with NEXT_PUBLIC_SITE_URL. */
+    "A strength-first gym in Mulund East, Mumbai. Loaded racks, plate-loaded machines and coaches who care about your form — open seven days a week.",
+  /** Override with NEXT_PUBLIC_SITE_URL in production. */
   siteUrl: "https://irontemplegym.example",
 } as const;
 
 export const contact = {
-  // TODO: Replace with the gym's verified street address.
-  address: "TODO: Add full address, Mumbai",
-  addressLines: ["TODO: Add full address", "Mumbai, Maharashtra, India"],
-  // TODO: Replace with the gym's verified phone number.
-  phone: "+91 00000 00000",
-  // TODO: Replace with the gym's WhatsApp number in international format, digits only.
-  whatsapp: "910000000000",
-  // TODO: Replace with the gym's verified email address.
-  email: "TODO@example.com",
-  // TODO: Replace with the gym's verified Instagram profile.
-  instagram: "https://instagram.com/TODO",
-  instagramHandle: "@TODO",
+  address:
+    "Podium 3, HS Pearl, V.B. Phadake Road, Sane Guruji Nagar, Mulund East, Mumbai, Maharashtra 400081",
+  addressLines: [
+    "Podium 3, HS Pearl",
+    "V.B. Phadake Road, Sane Guruji Nagar",
+    "Mulund East, Mumbai 400081",
+  ],
+  phone: "+91 91676 82222",
+  whatsapp: "919167682222",
+  instagram: "https://www.instagram.com/irontemple_mulund/",
+  instagramHandle: "@irontemple_mulund",
   coordinates: { lat: 19.166862, lng: 72.960197 },
   mapsUrl:
     "https://www.google.com/maps/place/Iron+Temple+Gym/@19.1673514,72.9560699,17z/data=!4m6!3m5!1s0x3be7b9c1041d6327:0xbe5e1b6a0a2f9126!8m2!3d19.166862!4d72.960197",
-  mapEmbedUrl:
-    "https://www.google.com/maps?q=19.166862,72.960197&z=16&output=embed",
+  mapEmbedUrl: "https://www.google.com/maps?q=19.166862,72.960197&z=16&output=embed",
 } as const;
 
-/**
- * Hours in 24-hour format, Asia/Kolkata.
- * TODO: Confirm opening hours with the gym. Current values are placeholders.
- */
+/** Opening hours, Asia/Kolkata. Verified against the Google listing. */
 export const hours: Record<Weekday, DayHours> = {
-  monday: { open: "05:30", close: "22:30" },
-  tuesday: { open: "05:30", close: "22:30" },
-  wednesday: { open: "05:30", close: "22:30" },
-  thursday: { open: "05:30", close: "22:30" },
-  friday: { open: "05:30", close: "22:30" },
-  saturday: { open: "05:30", close: "22:30" },
-  sunday: { open: "06:00", close: "12:00" },
+  monday: { open: "05:00", close: "23:00" },
+  tuesday: { open: "05:00", close: "23:00" },
+  wednesday: { open: "05:00", close: "23:00" },
+  thursday: { open: "05:00", close: "23:00" },
+  friday: { open: "05:00", close: "23:00" },
+  saturday: { open: "05:00", close: "22:00" },
+  sunday: { open: "07:00", close: "15:00" },
 };
 
 export const hoursNote =
-  "Holiday timings may differ. Call the front desk before you travel on public holidays.";
+  "Hours can change on public holidays. Call the front desk before you travel.";
 
 export const social = {
   instagram: contact.instagram,
   google: contact.mapsUrl,
 } as const;
 
-/**
- * TODO: Rating and review count are placeholders. Replace with the live
- * Google Business Profile numbers before launch.
- */
+/** From the Google Business Profile. */
 export const rating = {
-  value: 4.8,
-  reviewCount: 100,
+  value: 4.9,
+  reviewCount: 177,
   source: "Google",
 } as const;
 
@@ -99,29 +88,11 @@ export const stats = [
     value: rating.value,
     decimals: 1,
     suffix: "",
-    note: `${rating.reviewCount} reviews · ${rating.source}`,
+    note: `${rating.reviewCount} reviews`,
   },
-  {
-    label: "Reviews",
-    value: rating.reviewCount,
-    decimals: 0,
-    suffix: "+",
-    note: "Real members, real sessions",
-  },
-  {
-    label: "Days a week",
-    value: 7,
-    decimals: 0,
-    suffix: "",
-    note: "Open every day",
-  },
-  {
-    label: "Program tracks",
-    value: 6,
-    decimals: 0,
-    suffix: "",
-    note: "One clear goal: progress",
-  },
+  { label: "Days open", value: 7, decimals: 0, suffix: "", note: "Monday to Sunday" },
+  { label: "Weekday hours", value: 18, decimals: 0, suffix: "", note: "5 AM to 11 PM" },
+  { label: "Training tracks", value: 6, decimals: 0, suffix: "", note: "One standard" },
 ] as const;
 
 export const programs = [
@@ -130,273 +101,138 @@ export const programs = [
     number: "01",
     title: "Weight Training",
     description:
-      "Barbells, dumbbells and machines with enough room to actually work. Build a base that carries into everything else.",
+      "Racks, benches, barbells and a full run of dumbbells. Build a base that carries into everything else.",
     tags: ["Strength", "Hypertrophy"],
-    icon: "dumbbell",
-  },
-  {
-    id: "cardio",
-    number: "02",
-    title: "Cardio",
-    description:
-      "Treadmills, cycles and rowers for conditioning that supports your lifting instead of competing with it.",
-    tags: ["Endurance", "Heart health"],
-    icon: "heart-pulse",
   },
   {
     id: "strength-conditioning",
-    number: "03",
+    number: "02",
     title: "Strength & Conditioning",
     description:
-      "Structured sessions built around the big lifts, loaded carries and athletic movement. Coached, not improvised.",
+      "Structured work around the big lifts, loaded carries and athletic movement. Coached, not improvised.",
     tags: ["Performance", "Power"],
-    icon: "zap",
   },
   {
     id: "personal-training",
-    number: "04",
+    number: "03",
     title: "Personal Training",
     description:
-      "One-to-one coaching with a plan written for your body, schedule and experience level. Every rep has a reason.",
+      "One-to-one coaching with a plan written for your body, your schedule and your experience level.",
     tags: ["1-on-1", "Coached"],
-    icon: "user-check",
   },
   {
     id: "fat-loss",
-    number: "05",
+    number: "04",
     title: "Fat Loss",
     description:
-      "Sustainable training and practical nutrition habits. No crash diets, no gimmicks — just consistent work.",
+      "Sustainable training and practical nutrition habits. No crash diets, no gimmicks — consistent work.",
     tags: ["Conditioning", "Habits"],
-    icon: "flame",
   },
   {
     id: "muscle-gain",
-    number: "06",
+    number: "05",
     title: "Muscle Gain",
     description:
-      "Progressive overload, smart volume and recovery. A straightforward path to adding size and strength.",
+      "Progressive overload, sensible volume and recovery. A straightforward path to more size and strength.",
     tags: ["Size", "Progression"],
-    icon: "trending-up",
+  },
+  {
+    id: "cardio",
+    number: "06",
+    title: "Cardio",
+    description:
+      "Treadmills, cycles and cross trainers by the window — conditioning that supports your lifting.",
+    tags: ["Endurance", "Heart health"],
   },
 ] as const;
 
-export const aboutFeatures = [
+export const whyUs = [
   {
-    title: "Serious Equipment",
+    number: "01",
+    title: "Equipment that works",
     description:
-      "Racks, bars, plates and machines chosen for training, not for show. Maintained and ready to use.",
-    icon: "dumbbell",
+      "Dumbbells up to the heavy end, plate-loaded machines, cables, benches and cardio machines — all maintained and ready to use.",
   },
   {
-    title: "Expert Trainers",
+    number: "02",
+    title: "Coaches on the floor",
     description:
-      "Coaches who watch your form, adjust your plan and tell you the truth about your training.",
-    icon: "user-check",
+      "Trainers who watch your setup, correct your form and tell you the truth about your training instead of selling you another plan.",
   },
   {
-    title: "Clean & Spacious",
+    number: "03",
+    title: "Room to train",
     description:
-      "A floor you can move through, with room to set up, breathe and focus on the session.",
-    icon: "sparkles",
+      "A wide, mirrored floor with space to set up, breathe and focus. You are not queuing for a bench at Iron Temple.",
   },
   {
-    title: "Result Focused",
+    number: "04",
+    title: "Progress you can see",
     description:
-      "No guesswork. Track your lifts, measure your progress and keep moving the numbers forward.",
-    icon: "target",
+      "Track your lifts, measure what changes and keep the numbers moving. Motivation follows results.",
   },
 ] as const;
 
 export const facilities = [
+  { id: "free-weights", title: "Free weights", description: "Barbells, plates and a full dumbbell run." },
+  { id: "machines", title: "Plate-loaded machines", description: "Press, row, squat and leg stations." },
+  { id: "cables", title: "Cable stations", description: "Pulley work for every angle." },
+  { id: "benches", title: "Benches & racks", description: "Flat, incline and adjustable setups." },
+  { id: "cardio", title: "Cardio floor", description: "Treadmills and cross trainers by the window." },
+  { id: "floor", title: "Open training floor", description: "Mirrored, lit and laid out to move through." },
+] as const;
+
+export const facilityImages = [
   {
-    id: "strength-floor",
-    title: "Strength Floor",
-    description: "Power racks, platforms and free weights.",
-    image: "/images/facility-1.webp",
-    layout: "wide",
+    src: "/images/facility-strength.webp",
+    alt: "Plate-loaded leg press and benches on the Iron Temple Gym floor",
+    label: "The strength floor",
   },
   {
-    id: "cardio-zone",
-    title: "Cardio Zone",
-    description: "Treadmills, cycles and rowers.",
-    image: "/images/facility-2.webp",
-    layout: "normal",
+    src: "/images/facility-cardio.webp",
+    alt: "Treadmills along the window at Iron Temple Gym",
+    label: "Cardio, by the window",
   },
   {
-    id: "dumbbell-rack",
-    title: "Dumbbell Rack",
-    description: "A full run of fixed dumbbells.",
-    image: "/images/facility-3.webp",
-    layout: "normal",
-  },
-  {
-    id: "functional-area",
-    title: "Functional Area",
-    description: "Ropes, sleds and open floor.",
-    image: "/images/facility-4.webp",
-    layout: "normal",
-  },
-  {
-    id: "plate-storage",
-    title: "Plate Storage",
-    description: "Organised, loaded and ready.",
-    image: "/images/facility-5.webp",
-    layout: "normal",
-  },
-  {
-    id: "training-floor",
-    title: "Training Floor",
-    description: "Space to set up and put in work.",
-    image: "/images/facility-6.webp",
-    layout: "wide",
+    src: "/images/facility-wall.webp",
+    alt: "The Iron Temple flame mural beside plate-loaded machines",
+    label: "Where the work happens",
   },
 ] as const;
 
-export const trainers = [
-  {
-    // TODO: Replace with a real coach's name, speciality, bio and photo.
-    name: "Trainer Name",
-    speciality: "Strength & Conditioning",
-    bio: "Coaching the fundamentals: squat, press, pull and the consistency to repeat them.",
-    image: "/images/trainer-1.webp",
-    instagram: "https://instagram.com/TODO",
-  },
-  {
-    // TODO: Replace with a real coach's name, speciality, bio and photo.
-    name: "Trainer Name",
-    speciality: "Personal Training & Fat Loss",
-    bio: "Practical programming for busy schedules, with habits that hold outside the gym.",
-    image: "/images/trainer-2.webp",
-    instagram: "https://instagram.com/TODO",
-  },
-  {
-    // TODO: Replace with a real coach's name, speciality, bio and photo.
-    name: "Trainer Name",
-    speciality: "Muscle Gain & Nutrition",
-    bio: "Building size with patient progression, honest feedback and simple nutrition.",
-    image: "/images/trainer-3.webp",
-    instagram: "https://instagram.com/TODO",
-  },
-] as const;
-
-export const billingCycles = [
-  { id: "monthly", label: "Monthly", shortLabel: "Monthly", note: "Billed every month" },
-  { id: "quarterly", label: "Quarterly", shortLabel: "3 Months", note: "Billed every 3 months" },
-  { id: "half-yearly", label: "Half-Yearly", shortLabel: "6 Months", note: "Billed every 6 months" },
-  { id: "yearly", label: "Yearly", shortLabel: "12 Months", note: "Billed once a year" },
-] as const;
-
-/**
- * TODO: All plan pricing is intentionally left as "Contact for pricing".
- * Add verified amounts (in INR) under `prices` and they will appear automatically.
- */
-export const plans = [
-  {
-    id: "essential",
-    name: "Essential",
-    tagline: "Train on your own terms",
-    description:
-      "Full access to the floor for members who already know their way around a barbell.",
-    popular: false,
-    features: [
-      "Full gym floor access",
-      "Strength & cardio equipment",
-      "Locker room access",
-      "Introductory floor walkthrough",
-      "Open 7 days a week",
-    ],
-    prices: {
-      monthly: null,
-      quarterly: null,
-      "half-yearly": null,
-      yearly: null,
-    } as Record<BillingCycleId, number | null>,
-  },
-  {
-    id: "performance",
-    name: "Performance",
-    tagline: "Structure beats guesswork",
-    description:
-      "Everything in Essential, plus a written training plan and regular check-ins with a coach.",
-    popular: true,
-    features: [
-      "Everything in Essential",
-      "Written training programme",
-      "Monthly progress check-in",
-      "Body composition tracking",
-      "Priority class booking",
-      "Nutrition guidance",
-    ],
-    prices: {
-      monthly: null,
-      quarterly: null,
-      "half-yearly": null,
-      yearly: null,
-    } as Record<BillingCycleId, number | null>,
-  },
-  {
-    id: "elite",
-    name: "Elite",
-    tagline: "Coaching in your corner",
-    description:
-      "One-to-one personal training and close support for members chasing a specific goal.",
-    popular: false,
-    features: [
-      "Everything in Performance",
-      "1-on-1 personal training sessions",
-      "Custom programme every 4 weeks",
-      "Form coaching on the big lifts",
-      "WhatsApp check-ins with your coach",
-      "Flexible session scheduling",
-    ],
-    prices: {
-      monthly: null,
-      quarterly: null,
-      "half-yearly": null,
-      yearly: null,
-    } as Record<BillingCycleId, number | null>,
-  },
-] as const;
-
-export const pricePlaceholder = "Contact for pricing";
-
+/** Reviews quoted from the gym's public Google Business Profile. */
 export const testimonials = [
   {
-    // TODO: Replace with a real Google review (with permission).
-    name: "Rohan M.",
-    meta: "Member · Weight Training",
+    name: "Sayali Ketkar",
+    meta: "Google review · 5 stars",
     rating: 5,
     quote:
-      "Exactly what I wanted from a gym — good racks, enough plates, and nobody bothering you while you train. The floor is clean and the crowd is serious.",
-    initials: "RM",
+      "A well-equipped gym in Mulund East. Clean and motivating, and the trainers are knowledgeable and supportive. A special mention to Piyush Sir who is very knowledgeable, encouraging, and always willing to help with proper guidance and form.",
+    initials: "SK",
   },
   {
-    // TODO: Replace with a real Google review (with permission).
-    name: "Priya S.",
-    meta: "Member · Personal Training",
+    name: "Suyash Deshmukh",
+    meta: "Google review · 5 stars",
     rating: 5,
     quote:
-      "My coach actually corrected my form instead of just counting reps. Three months in, I am lifting more than I ever have and my knees feel better than before.",
-    initials: "PS",
+      "Almost a year at Iron Temple and this place has become a huge part of my routine and growth. I mostly train alone, but the atmosphere here keeps you motivated every single day.",
+    initials: "SD",
   },
   {
-    // TODO: Replace with a real Google review (with permission).
-    name: "Aman K.",
-    meta: "Member · Fat Loss",
+    name: "Riya Dhamapurkar",
+    meta: "Google review · 5 stars",
     rating: 5,
     quote:
-      "No pressure, no fake promises. Just a plan I could follow around a full-time job. The morning slot is calm and the equipment is always in working order.",
-    initials: "AK",
+      "I've had a wonderful experience at this Iron Temple gym — the atmosphere is always positive and motivating. The equipments and facilities are well-maintained, making workouts enjoyable and effective.",
+    initials: "RD",
   },
   {
-    // TODO: Replace with a real Google review (with permission).
-    name: "Farhan Q.",
-    meta: "Member · Strength & Conditioning",
+    name: "Chitra Raikar",
+    meta: "Google review · 5 stars",
     rating: 5,
     quote:
-      "The atmosphere is the best part. People show up, put their heads down and train. It is the kind of room that makes you add another plate.",
-    initials: "FQ",
+      "I am happy to share my experience at Iron Temple Gym in Mulund East. What I really like about this gym is the overall atmosphere.",
+    initials: "CR",
   },
 ] as const;
 
@@ -404,213 +240,213 @@ export const faqs = [
   {
     question: "Do I need experience to join?",
     answer:
-      "No. We welcome complete beginners. Every new member gets a floor walkthrough, and if you want more hands-on guidance, our personal training plans start from the basics.",
+      "No. Beginners are welcome. A coach walks you through the floor, shows you how the machines work and helps you start with weights you can actually handle.",
   },
   {
     question: "Can I book a trial session?",
     answer:
-      "Yes. Use the enquiry form or message us on WhatsApp and we will set up a free trial session so you can see the space, meet a coach and try the equipment before committing.",
+      "Yes. Send the enquiry form or message us on WhatsApp and we will set up a trial session so you can see the floor, meet a coach and train before you commit.",
   },
   {
     question: "What should I bring for my first session?",
     answer:
-      "Comfortable training clothes, a water bottle, a small towel and indoor training shoes. We will take care of the rest. Lockers are available on site.",
+      "Training clothes, a water bottle, a small towel and indoor training shoes. Bring a lock if you want to use a locker.",
   },
   {
     question: "Do you offer personal training?",
     answer:
-      "Yes. Personal training is available as part of the Elite plan and can also be added to other plans. Sessions are booked directly with your coach.",
+      "Yes. One-to-one personal training is available with our floor coaches, either as a standalone arrangement or alongside your membership. Ask at the front desk for current options.",
   },
   {
-    question: "Is there parking nearby?",
+    question: "What are your timings?",
     answer:
-      "Street parking is available around the gym. If you are visiting at peak hours, message us on WhatsApp and we will point you to the easiest option.",
-  },
-  {
-    question: "How do I freeze or cancel my membership?",
-    answer:
-      "Talk to the front desk or message us on WhatsApp. We will explain the options available on your current plan. There are no hidden lock-in surprises.",
+      "Monday to Friday 5 AM to 11 PM, Saturday 5 AM to 10 PM, and Sunday 7 AM to 3 PM. Holiday hours can differ, so call ahead on public holidays.",
   },
 ] as const;
 
 export const gallery = [
-  { src: "/images/gallery-1.webp", alt: "Loaded barbell on the strength floor", caption: "The strength floor", span: "wide" },
-  { src: "/images/gallery-2.webp", alt: "Kettlebell under a spotlight", caption: "Tools of the trade", span: "tall" },
-  { src: "/images/gallery-3.webp", alt: "Dumbbell rack in the gym", caption: "Dumbbell rack", span: "normal" },
-  { src: "/images/gallery-4.webp", alt: "Stacked weight plates", caption: "Loaded and ready", span: "normal" },
-  { src: "/images/gallery-5.webp", alt: "Battle ropes on the training floor", caption: "Conditioning corner", span: "wide" },
-  { src: "/images/gallery-6.webp", alt: "Squat rack and steel beams", caption: "Under the bar", span: "normal" },
-  { src: "/images/gallery-7.webp", alt: "Cardio machines in low light", caption: "Cardio zone", span: "normal" },
-  { src: "/images/gallery-8.webp", alt: "Chalk and light on the gym floor", caption: "Chalk up", span: "tall" },
+  {
+    src: "/images/gallery-1.webp",
+    alt: "Dumbbell racks and benches on the Iron Temple Gym floor",
+    caption: "The dumbbell floor",
+    span: "wide",
+  },
+  {
+    src: "/images/gallery-2.webp",
+    alt: "Hanuman statue above a plate-loaded leg press at Iron Temple Gym",
+    caption: "Strength floor",
+    span: "tall",
+  },
+  {
+    src: "/images/gallery-3.webp",
+    alt: "Treadmills along the window wall at Iron Temple Gym",
+    caption: "Cardio, by the window",
+    span: "tall",
+  },
+  {
+    src: "/images/gallery-4.webp",
+    alt: "Iron Temple flame mural beside plate-loaded equipment",
+    caption: "The wall",
+    span: "normal",
+  },
+  {
+    src: "/images/gallery-5.webp",
+    alt: "Mirrored training floor and machines in low light",
+    caption: "Low light, heavy sets",
+    span: "normal",
+  },
+  {
+    src: "/images/gallery-6.webp",
+    alt: "Iron Temple Gym signage on the HS Pearl building, Mulund East",
+    caption: "HS Pearl, Mulund East",
+    span: "normal",
+  },
+  {
+    src: "/images/gallery-7.webp",
+    alt: "Iron Temple Gym exterior signage seen through the trees",
+    caption: "Find us on V.B. Phadake Road",
+    span: "wide",
+  },
 ] as const;
 
 export const navLinks = [
   { label: "About", href: "#about" },
   { label: "Programs", href: "#programs" },
   { label: "Facilities", href: "#facilities" },
-  { label: "Timings", href: "#timings" },
-  { label: "Plans", href: "#plans" },
   { label: "Gallery", href: "#gallery" },
-  { label: "Contact", href: "#contact" },
+  { label: "Reviews", href: "#reviews" },
+  { label: "Visit", href: "#visit" },
 ] as const;
 
 export const inquiryGoals = [
-  "Fat Loss",
-  "Muscle Gain",
-  "General Fitness",
-  "Personal Training",
-  "Other",
+  "Fat loss",
+  "Muscle gain",
+  "General fitness",
+  "Personal training",
+  "Something else",
 ] as const;
 
-export const inquiryTimings = ["Morning", "Afternoon", "Evening"] as const;
+export const inquiryTimings = ["Early morning", "Morning", "Afternoon", "Evening"] as const;
 
-/** All marketing copy lives here so components stay content-free. */
 export const copy = {
   hero: {
-    eyebrow: "Mumbai · Strength & Conditioning",
-    headlineTop: "Forge your",
-    headlineAccent: "strongest",
-    headlineBottom: "self.",
+    eyebrow: "Mulund East · Mumbai · Open seven days",
+    headline: ["Strength", "is a", "practice."],
     subtext:
-      "Serious equipment, honest coaching and a floor built for people who show up. Your first session is on us.",
-    primaryCta: "Book a Free Trial",
-    secondaryCta: "View Timings",
+      "A strength-first gym in Mulund East. Loaded racks, plate-loaded machines and coaches who correct your form — not just count your reps.",
+    primaryCta: "Book a free trial",
+    secondaryCta: "See the floor",
     openLabel: "Open now",
     closedLabel: "Closed",
     checkingLabel: "Checking hours",
     ratingSuffix: "Google reviews",
+    scrollLabel: "Scroll",
+    imageAlt: "Athlete setting up for a heavy deadlift in a dark gym",
     ticker: [
-      "Strength",
+      "Strength training",
       "Conditioning",
-      "Fat Loss",
-      "Muscle Gain",
-      "Personal Training",
+      "Fat loss",
+      "Muscle gain",
+      "Personal coaching",
       "Cardio",
+      "Open seven days",
     ],
-    scrollLabel: "Scroll to explore",
-    imageAlt:
-      "Dark industrial gym floor with a loaded barbell and dramatic orange light",
   },
   sections: {
     about: {
-      eyebrow: "The temple",
-      heading: "Built for",
-      accent: "the work",
-      intro: "No mirrors-and-music theatre. Just a room that takes training seriously.",
+      index: "01",
+      eyebrow: "The gym",
+      heading: "A room",
+      accent: "built for the work.",
+      intro:
+        "No lobby theatre, no mirror-and-music gimmicks. Just a floor that takes training seriously.",
     },
     programs: {
+      index: "02",
       eyebrow: "What we train",
       heading: "Pick your",
-      accent: "battle",
+      accent: "lane.",
       intro:
         "Six ways to train, one standard: show up, do the work, keep the numbers moving.",
-      footerNote: "Not sure where to start? That is what the trial is for.",
-      footerCta: "Talk to a coach",
-      aside: ["Every programme", "starts with a", "conversation."],
     },
     facilities: {
+      index: "03",
       eyebrow: "Inside the floor",
-      heading: "Tools of the",
-      accent: "trade",
+      heading: "Everything",
+      accent: "you need.",
       intro:
-        "Everything you need to train hard, laid out with room to move. Replaced, maintained and ready.",
-    },
-    trainers: {
-      eyebrow: "Your corner",
-      heading: "Meet the",
-      accent: "coaches",
-      intro:
-        "Coaches who correct, push and keep the plan honest. Less cheerleading, more progress.",
-    },
-    timings: {
-      eyebrow: "Plan your session",
-      heading: "Opening",
-      accent: "hours",
-      intro:
-        "Early starts, late finishes. Seven days a week, with a quiet window for everyone.",
-    },
-    plans: {
-      eyebrow: "Membership",
-      heading: "Commit to the",
-      accent: "process",
-      intro:
-        "Three straightforward plans. Pick the level of coaching you need and we will handle the rest.",
+        "Free weights, machines and cardio, laid out with room to move. Replaced, maintained and ready.",
     },
     gallery: {
+      index: "04",
       eyebrow: "The floor",
-      heading: "Inside Iron",
-      accent: "Temple",
+      heading: "Inside",
+      accent: "Iron Temple.",
       intro:
-        "Steel, chalk and the quiet before a heavy set. A look around the space.",
+        "Steel, chalk and the quiet before a heavy set. Photographs from the gym in Mulund East.",
     },
-    testimonials: {
+    reviews: {
+      index: "05",
       eyebrow: "Member words",
-      heading: "Earned, not",
-      accent: "given",
+      heading: "Earned,",
+      accent: "not given.",
       intro: "What members say after the sweat, the plateaus and the personal bests.",
     },
-    inquiry: {
+    enquiry: {
+      index: "06",
       eyebrow: "Free trial",
       heading: "Start where",
-      accent: "you are",
+      accent: "you are.",
       intro:
-        "Tell us what you are working toward. We will call you back with a trial slot, a look around the floor and an honest recommendation — no pressure.",
+        "Tell us what you are working toward. We will call you back with a trial slot, a walk around the floor and an honest recommendation — no pressure.",
       bulletPoints: [
-        "Free trial session, no card required",
+        "A trial session, no card required",
         "A walkthrough of the floor and equipment",
         "A plan matched to your goal and schedule",
       ],
       responseNote: "We usually reply within one working day.",
-      imageCaption: "Your first rep is the hardest. Take it.",
     },
     faq: {
+      index: "07",
       eyebrow: "Questions",
       heading: "Good to",
-      accent: "know",
+      accent: "know.",
       intro: "The things people ask before their first session.",
     },
-    contact: {
+    visit: {
+      index: "08",
       eyebrow: "Find us",
-      heading: "Come",
-      accent: "through",
+      heading: "Find the",
+      accent: "floor.",
       intro:
-        "Drop in for a trial, call the front desk or message us on WhatsApp. We are easy to find and hard to forget.",
-      mapLabel: "Iron Temple Gym · Mumbai",
-      directionsCta: "Get Directions",
+        "Podium 3 at HS Pearl, on V.B. Phadake Road in Mulund East. Drop in for a trial or call the front desk.",
+      directionsCta: "Get directions",
     },
   },
   about: {
     story: [
-      "Iron Temple Gym was built around a simple idea: a gym should be judged by the training that happens inside it. Not the lighting, not the lobby — the bars, the plates and the people who keep coming back.",
-      "The floor is set up for real work. Racks you can load, dumbbells that go heavy enough, and coaches who would rather fix your setup than sell you another supplement. Whether you are chasing your first pull-up or your next personal best, there is a lane for you here.",
+      "Iron Temple Gym sits on the podium level at HS Pearl in Mulund East. It was built around a simple idea: a gym should be judged by the training that happens inside it — the bars, the plates and the people who keep coming back.",
+      "The floor is set up for real work. A full run of dumbbells, plate-loaded machines, cables, benches and cardio by the window, with coaches who would rather fix your setup than sell you a supplement. Whether you are chasing your first pull-up or your next personal best, there is a lane for you here.",
     ],
     quote: "Show up. Do the work. Let the numbers tell the story.",
-    imageAlt: "Weight plates and a barbell in a dimly lit gym",
-    imageCaption: "The floor, before the rush.",
-    featuresLabel: "What you get",
+    imageAlt: "Members training on the dumbbell floor at Iron Temple Gym",
+    imageCaption: "The dumbbell floor, Mulund East.",
     ctaLabel: "Book your first session",
   },
-  plans: {
-    popularLabel: "Most popular",
-    priceNote: "Final pricing is confirmed at the front desk. All plans are subject to availability.",
-    enquireCta: "Enquire",
-    enquiryNote: "Not sure which plan fits? Book a trial and decide after you train.",
-    cycleLabel: "Billing cycle",
+  whyUs: {
+    eyebrow: "Why Iron Temple",
+    heading: "Not a",
+    accent: "fitness trend.",
+    intro:
+      "A gym can look good on camera and still be useless on a Tuesday night. We built ours around the things that actually move your training forward.",
   },
-  gallery: {
-    openLabel: "View image",
-    closeLabel: "Close gallery",
-    previousLabel: "Previous image",
-    nextLabel: "Next image",
+  facilities: {
+    listLabel: "On the floor",
+    imageNote: "Photographed at Iron Temple Gym, Mulund East",
   },
-  testimonials: {
-    googleCta: "Read more reviews on Google",
-    pauseLabel: "Pause testimonials",
-    playLabel: "Play testimonials",
-  },
-  inquiry: {
+  enquiry: {
     formTitle: "Book your free trial",
-    formNote: "Takes under a minute. No spam, ever.",
+    formNote: "Takes under a minute.",
     nameLabel: "Full name",
     phoneLabel: "Phone number",
     phoneHint: "10-digit Indian mobile number",
@@ -618,11 +454,9 @@ export const copy = {
     emailOptional: "Optional",
     goalLabel: "Your goal",
     timingLabel: "Preferred timing",
-    planLabel: "Plan interest",
     messageLabel: "Anything we should know?",
     messageOptional: "Optional",
     selectPlaceholder: "Select one",
-    planPlaceholder: "Not sure yet",
     submitLabel: "Send enquiry",
     submittingLabel: "Sending",
     whatsappLabel: "Send via WhatsApp",
@@ -639,53 +473,62 @@ export const copy = {
     privacyNote:
       "By sending this form you agree to be contacted about your enquiry. We do not share your details.",
   },
+  gallery: {
+    openLabel: "View image",
+    closeLabel: "Close gallery",
+    previousLabel: "Previous image",
+    nextLabel: "Next image",
+  },
+  testimonials: {
+    googleCta: "Read all 177 reviews on Google",
+  },
   common: {
-    joinNow: "Join Now",
-    bookTrial: "Book a Free Trial",
     callNow: "Call now",
-    email: "Email",
     whatsapp: "WhatsApp",
     instagram: "Instagram",
     today: "Today",
     openNow: "Open now",
     closed: "Closed",
-    call: "Call",
-    enquire: "Enquire",
   },
   footer: {
     blurb:
-      "A strength-first gym in Mumbai. Serious equipment, straight answers and a room that rewards consistency.",
+      "A strength-first gym in Mulund East, Mumbai. Serious equipment, straight answers and a room that rewards consistency.",
     quickLinksLabel: "Explore",
     contactLabel: "Find us",
     hoursLabel: "Hours",
-    socialLabel: "Follow",
     rights: "All rights reserved.",
     backToTop: "Back to top",
+    photoCredit:
+      "Gym photography from Iron Temple Gym's public Google Business listing. Hero photograph via Unsplash.",
   },
   floating: {
-    whatsappLabel: "Chat with Iron Temple on WhatsApp",
+    whatsappLabel: "Chat with Iron Temple Gym on WhatsApp",
     callLabel: "Call",
-    enquireLabel: "Enquire",
+    enquireLabel: "Free trial",
+  },
+  finalCta: {
+    eyebrow: "Your first session",
+    lines: ["Start", "strong", "here."],
+    body: "Walk in, meet a coach and train. No pressure, no contracts to sign on the spot.",
+    primary: "Book a free trial",
+    secondary: "Call the front desk",
   },
 } as const;
 
 export const seo = {
-  title:
-    "Iron Temple Gym, Mumbai | Strength, Fat Loss & Personal Training",
+  title: "Iron Temple Gym, Mulund East | Strength Training & Personal Coaching",
   description:
-    "Iron Temple Gym is a strength-focused gym in Mumbai with serious equipment, expert coaches and personal training for fat loss, muscle gain and general fitness. Book a free trial.",
+    "Iron Temple Gym is a strength-first gym in Mulund East, Mumbai — free weights, plate-loaded machines, cardio and hands-on coaching. Rated 4.9 on Google. Book a free trial.",
   keywords: [
-    "gym in Mumbai",
+    "gym in Mulund East",
     "Iron Temple Gym",
     "strength training Mumbai",
-    "personal training Mumbai",
-    "fat loss gym Mumbai",
-    "weight training gym",
+    "personal training Mulund",
+    "gym near HS Pearl",
+    "weight training gym Mumbai",
   ],
   ogImage: "/images/og.webp",
 } as const;
 
-export type Plan = (typeof plans)[number];
-export type BillingCycle = (typeof billingCycles)[number];
 export type Testimonial = (typeof testimonials)[number];
 export type GalleryItem = (typeof gallery)[number];
