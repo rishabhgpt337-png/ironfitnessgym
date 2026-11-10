@@ -7,7 +7,6 @@ import Facilities from "@/components/Facilities";
 import Testimonials from "@/components/Testimonials";
 import InquiryForm from "@/components/InquiryForm";
 import FAQ from "@/components/FAQ";
-import Contact from "@/components/Contact";
 import FinalCta from "@/components/FinalCta";
 import { buildGymJsonLd } from "@/lib/structured-data";
 
@@ -29,7 +28,6 @@ export default function HomePage() {
       <Testimonials />
       <InquiryForm />
       <FAQ />
-      <Contact />
       <FinalCta />
     </>
   );

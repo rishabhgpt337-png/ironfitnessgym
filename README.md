@@ -45,7 +45,7 @@ npm run lint
 
 ## Verified business information
 
-Everything in the header, visit section, footer and structured data comes from the gym's public
+Everything in the header, footer and structured data comes from the gym's public
 Google Business Profile and Instagram:
 
 - **Name** — Iron Temple Gym (आयरन टेम्पल जिम)
@@ -74,7 +74,7 @@ it is not presented as the gym itself. There is no hotlinking at runtime.
 | `hero.webp` | Hero (stock athlete photograph) |
 | `about.webp` | About section |
 | `facility-strength.webp`, `facility-cardio.webp`, `facility-wall.webp` | Facilities |
-| `gym-exterior.webp` | Visit / location |
+| `gym-exterior.webp` | Extra exterior shot (unused while the visit section is off) |
 | `gallery-1.webp` … `gallery-7.webp` | Extra floor photography (unused while the gallery section is off) |
 | `brand-mark.webp` | Logo mark cropped from the gym's own logo artwork |
 | `og.webp` | Social preview (1200×630) |

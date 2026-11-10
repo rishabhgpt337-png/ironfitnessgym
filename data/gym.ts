@@ -490,6 +490,12 @@ export const copy = {
     closed: "Closed",
   },
   footer: {
+    welcomeEyebrow: "Visit the temple",
+    welcomeHeading: ["Come train", "with us."],
+    welcomeBody:
+      "First time? Tell us where you want to get to and we will set up a free trial, walk you through the floor and help you find a starting point. No pressure, no contracts.",
+    welcomePrimary: "Book a free trial",
+    hoursNote: "Holiday hours can differ. Call before you travel on a public holiday.",
     blurb:
       "A strength-first gym in Mulund East, Mumbai. Serious equipment, straight answers and a room that rewards consistency.",
     quickLinksLabel: "Explore",

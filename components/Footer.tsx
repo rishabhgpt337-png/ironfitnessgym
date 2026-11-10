@@ -1,17 +1,96 @@
-import { ArrowUp, ArrowUpRight, Instagram, MapPin, Phone } from "lucide-react";
+import {
+  ArrowUp,
+  ArrowUpRight,
+  Instagram,
+  MapPin,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
 import Logo from "@/components/Logo";
+import FooterStatus from "@/components/FooterStatus";
 import { brand, contact, copy, navLinks } from "@/data/gym";
 import { getGroupedHours } from "@/lib/hours";
-import { telHref } from "@/lib/utils";
+import { telHref, whatsappHref } from "@/lib/utils";
 
 export default function Footer() {
   const groupedHours = getGroupedHours();
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-bg">
-      <div className="container-edge pb-28 pt-16 md:pb-12 lg:pt-20">
-        <div className="grid gap-11 md:grid-cols-2 lg:grid-cols-[1.4fr_0.7fr_1.1fr_0.9fr]">
+    <footer id="visit" className="relative scroll-mt-24 border-t border-border bg-bg">
+      <div aria-hidden="true" className="h-px w-full bg-gradient-to-r from-accent/70 via-border to-transparent" />
+
+      <div className="container-edge">
+        {/* Welcome */}
+        <div className="grid gap-12 py-16 lg:grid-cols-12 lg:gap-10 lg:py-20">
+          <div className="lg:col-span-7">
+            <p className="index-label flex items-center gap-3">
+              <span aria-hidden="true" className="h-px w-8 bg-accent" />
+              {copy.footer.welcomeEyebrow}
+            </p>
+            <h2 className="mt-5 font-display text-display-section uppercase text-text">
+              <span className="block">{copy.footer.welcomeHeading[0]}</span>
+              <span className="block text-accent">{copy.footer.welcomeHeading[1]}</span>
+            </h2>
+            <p className="mt-5 max-w-md text-pretty text-[15px] leading-relaxed text-muted">
+              {copy.footer.welcomeBody}
+            </p>
+
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <a href="#enquire" className="btn-primary w-full sm:w-auto">
+                {copy.footer.welcomePrimary}
+                <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+              </a>
+              <a
+                href={whatsappHref("Hi Iron Temple Gym, I'd like to book a free trial.")}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-secondary w-full sm:w-auto"
+              >
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                {copy.common.whatsapp}
+              </a>
+            </div>
+
+            <p className="mt-4 flex items-center gap-2 font-label text-[9.5px] uppercase tracking-[0.18em] text-muted/80">
+              <Phone className="h-3 w-3 text-accent" aria-hidden="true" />
+              Or call the front desk on{" "}
+              <a href={telHref()} className="text-text/80 underline-offset-4 transition-colors hover:text-accent hover:underline">
+                {contact.phone}
+              </a>
+            </p>
+          </div>
+
+          <div className="lg:col-span-5 lg:col-start-8">
+            <div className="h-full border-t border-border pt-6 lg:border-l lg:border-t-0 lg:pl-10 lg:pt-0">
+              <p className="index-label">Right now</p>
+              <FooterStatus />
+
+              <div className="mt-8 border-t border-border pt-5">
+                <p className="index-label">The address</p>
+                <address className="mt-3 not-italic text-[14px] leading-relaxed text-text/85">
+                  {contact.addressLines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </address>
+                <a
+                  href={contact.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-line mt-4"
+                >
+                  Get directions
+                  <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Directory */}
+        <div className="grid gap-10 border-t border-border py-12 md:grid-cols-2 lg:grid-cols-[1.5fr_0.8fr_1.1fr_0.9fr] lg:gap-12">
           <div>
             <Logo />
             <p className="mt-5 max-w-xs text-[13px] leading-relaxed text-muted">
@@ -102,20 +181,11 @@ export default function Footer() {
                 </a>
               </li>
             </ul>
-            <a
-              href={contact.mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-line mt-4"
-            >
-              Get directions
-              <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-            </a>
           </div>
 
           <div>
             <p className="index-label text-text">{copy.footer.hoursLabel}</p>
-            <dl className="mt-4 space-y-2">
+            <dl className="mt-4 space-y-2.5">
               {groupedHours.map((group) => (
                 <div key={group.label}>
                   <dt className="font-label text-[9px] uppercase tracking-[0.16em] text-muted">
@@ -126,12 +196,12 @@ export default function Footer() {
               ))}
             </dl>
             <p className="mt-4 text-[10.5px] leading-relaxed text-muted/70">
-              Holiday hours can differ.
+              {copy.footer.hoursNote}
             </p>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 border-t border-border py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-label text-[9px] uppercase tracking-[0.16em] text-muted">
             © {year} {brand.name}. {copy.footer.rights}
           </p>
