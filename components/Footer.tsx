@@ -201,7 +201,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-border py-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-4 border-t border-border pb-24 pt-6 sm:flex-row sm:items-center sm:justify-between md:pb-8">
           <p className="font-label text-[9px] uppercase tracking-[0.16em] text-muted">
             © {year} {brand.name}. {copy.footer.rights}
           </p>
