@@ -2,10 +2,8 @@ import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import Stats from "@/components/Stats";
 import About from "@/components/About";
-import WhyUs from "@/components/WhyUs";
 import Programs from "@/components/Programs";
 import Facilities from "@/components/Facilities";
-import Gallery from "@/components/Gallery";
 import Testimonials from "@/components/Testimonials";
 import InquiryForm from "@/components/InquiryForm";
 import FAQ from "@/components/FAQ";
@@ -26,10 +24,8 @@ export default function HomePage() {
       <Marquee />
       <Stats />
       <About />
-      <WhyUs />
       <Programs />
       <Facilities />
-      <Gallery />
       <Testimonials />
       <InquiryForm />
       <FAQ />

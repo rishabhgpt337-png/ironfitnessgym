@@ -75,7 +75,7 @@ it is not presented as the gym itself. There is no hotlinking at runtime.
 | `about.webp` | About section |
 | `facility-strength.webp`, `facility-cardio.webp`, `facility-wall.webp` | Facilities |
 | `gym-exterior.webp` | Visit / location |
-| `gallery-1.webp` … `gallery-7.webp` | Gallery and lightbox |
+| `gallery-1.webp` … `gallery-7.webp` | Extra floor photography (unused while the gallery section is off) |
 | `brand-mark.webp` | Logo mark cropped from the gym's own logo artwork |
 | `og.webp` | Social preview (1200×630) |
 
@@ -118,8 +118,7 @@ the UI can be tested. Demo mode does not send email — configure the key before
 
 ## Accessibility and performance
 
-- Semantic landmarks, a skip link, visible focus rings and keyboard-operable menu, accordion and
-  gallery lightbox.
+- Semantic landmarks, a skip link, visible focus rings and a keyboard-operable menu and accordion.
 - Mobile drawer closes on Escape and restores focus to the trigger.
 - Motion respects `prefers-reduced-motion`.
 - All meaningful images have descriptive alt text.

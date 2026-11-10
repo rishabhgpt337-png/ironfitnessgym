@@ -313,7 +313,6 @@ export const navLinks = [
   { label: "About", href: "#about" },
   { label: "Programs", href: "#programs" },
   { label: "Facilities", href: "#facilities" },
-  { label: "Gallery", href: "#gallery" },
   { label: "Reviews", href: "#reviews" },
   { label: "Visit", href: "#visit" },
 ] as const;
@@ -386,14 +385,14 @@ export const copy = {
         "Steel, chalk and the quiet before a heavy set. Photographs from the gym in Mulund East.",
     },
     reviews: {
-      index: "05",
+      index: "04",
       eyebrow: "Member words",
       heading: "Earned,",
       accent: "not given.",
       intro: "What members say after the sweat, the plateaus and the personal bests.",
     },
     enquiry: {
-      index: "06",
+      index: "05",
       eyebrow: "Free trial",
       heading: "Start where",
       accent: "you are.",
@@ -407,14 +406,14 @@ export const copy = {
       responseNote: "We usually reply within one working day.",
     },
     faq: {
-      index: "07",
+      index: "06",
       eyebrow: "Questions",
       heading: "Good to",
       accent: "know.",
       intro: "The things people ask before their first session.",
     },
     visit: {
-      index: "08",
+      index: "07",
       eyebrow: "Find us",
       heading: "Find the",
       accent: "floor.",
